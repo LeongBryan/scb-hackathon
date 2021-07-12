@@ -69,7 +69,8 @@ class LandingScreen extends StatelessWidget {
                     //   new Image.asset("images/obiwan_profile.jpg", width: 200, height: 200),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(30.0),
-                        child: Image(image: AssetImage("images/obiwan_profile.jpg"), width: 200, height:200,),
+                        child: Image.network('https://i.ibb.co/6ybFMQs/obiwan-profile.jpg', width: 160, height:160,),
+                        // child: Image.asset('images/obiwan_profile.jpg', width: 200, height:200,),
                     ),
                   ],
                 ),
@@ -91,7 +92,7 @@ class LandingScreen extends StatelessWidget {
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topCenter,
-                    child: new Image.asset("images/obiwan_qrcode.png",
+                    child: new Image.network('https://i.ibb.co/N294xQz/obiwan-qrcode.png',
                                         fit: BoxFit.fitHeight, 
                                         width: 300,
                                         height: 300,),
