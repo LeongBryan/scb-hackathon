@@ -22,7 +22,7 @@ Widget addDetailField(String header, String value, double padding, ThemeData the
               children: [
                 Text(header, style: themeData.textTheme.bodyText2,),
                 addVerticalSpace(2),
-                Text(value, style: themeData.textTheme.headline2,),
+                Text(value, style: themeData.textTheme.headline3,),
               ],
             )
           );
