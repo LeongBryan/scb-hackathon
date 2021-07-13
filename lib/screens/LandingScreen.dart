@@ -20,30 +20,30 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final ThemeData themeData = Theme.of(context);
-    final double padding = 25;
+    final double padding = 13;
     final sidePadding = EdgeInsets.symmetric(horizontal: padding);
     final LocalAuthentication _localAuthentication = LocalAuthentication();
 
     Timer _timer;
-      void startTimer() {
-        const oneSec = const Duration(seconds: 1);
-        _timer = new Timer.periodic(
-          oneSec,
-          (Timer timer) {
-            if (_start == 0) {
-              setState(() {
-                timer.cancel();
-                authStatus = 'Not Authenticated';
-              });
-            } else {
-              setState(() {
-                _start--;
-                print(_start);
-              });
-            }
-          },
-        );
-      }
+    void startTimer() {
+      const oneSec = const Duration(seconds: 1);
+      _timer = new Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          if (_start == 0) {
+            setState(() {
+              timer.cancel();
+              authStatus = 'Not Authenticated';
+            });
+          } else {
+            setState(() {
+              _start--;
+              print(_start);
+            });
+          }
+        },
+      );
+    }
 
     Future<bool> checkingForBioMetrics() async {
       bool canCheckBiometrics = await _localAuthentication.canCheckBiometrics;
@@ -62,7 +62,7 @@ class _LandingScreenState extends State<LandingScreen> {
         setState(() {
           authStatus = authenticated ? "Authenticated" : "Not Authenticated";
           print(authStatus);
-          if (authenticated == true){
+          if (authenticated == true) {
             _start = 10;
             startTimer();
           }
@@ -75,7 +75,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
     List<Widget> getQr() {
       print('authStatus: ' + authStatus);
-      
+
       if (authStatus == "Authenticated") {
         return <Widget>[
           new Image.network(
@@ -88,7 +88,7 @@ class _LandingScreenState extends State<LandingScreen> {
         ];
       } else {
         return <Widget>[
-          addVerticalSpace(padding * 7),
+          addVerticalSpace(padding * 13),
           IconButton(
             constraints: BoxConstraints(
               minHeight: 100,
@@ -106,20 +106,24 @@ class _LandingScreenState extends State<LandingScreen> {
         ];
       }
     }
+
     @override
     void initState() {
       checkingForBioMetrics();
       super.initState();
     }
 
+    // Begin Actual components
     return SafeArea(
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage("https://i.ibb.co/K7JwCY2/scb-logo.png"), // <-- BACKGROUND IMAGE
+              image: NetworkImage(
+                  "https://i.ibb.co/K7JwCY2/scb-logo.png"), // <-- BACKGROUND IMAGE
               fit: BoxFit.cover,
-              colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop),
             ),
           ),
           width: size.width,
@@ -162,6 +166,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 padding: sidePadding,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +174,8 @@ class _LandingScreenState extends State<LandingScreen> {
                         // Details
                         addVerticalSpace(padding),
                         addDetailField('Name:', "Kenobi, Obiwan", 0, themeData),
+                        addVerticalSpace(padding),
+                        addDetailField('PSID:', "1626151", 0, themeData),
                         addVerticalSpace(padding),
                         addDetailField(
                             'Job Designation:', "Force User", 0, themeData),
@@ -186,8 +193,8 @@ class _LandingScreenState extends State<LandingScreen> {
                       borderRadius: BorderRadius.circular(30.0),
                       child: Image.network(
                         'https://i.ibb.co/6ybFMQs/obiwan-profile.jpg',
-                        width: 160,
-                        height: 160,
+                        width: 170,
+                        height: 180,
                       ),
                       // child: Image.asset('images/obiwan_profile.jpg', width: 200, height:200,),
                     ),
@@ -209,8 +216,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: getQr())
-                  ),
+                      children: getQr())),
             ],
           ),
         ),

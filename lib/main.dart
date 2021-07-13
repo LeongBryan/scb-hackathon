@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scb_hackathon/screens/LandingScreen.dart';
+import 'package:scb_hackathon/screens/HomeScreen.dart';
 import 'package:scb_hackathon/utils/constants.dart';
 import 'dart:ui';
 
